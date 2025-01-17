@@ -10,30 +10,22 @@ const isAuthenticated = (req, res, next) => {
   next();
 };
 
+
 // Halaman dashboard dosen
 router.get("/", isAuthenticated, (req, res) => {
   const user = req.session.user;
 
-  connection.query("SELECT * FROM matakuliah", (err, matkulRows) => {
-    if (err) {
-      console.error("Error fetching matakuliah:", err);
-      return res.status(500).send("Error fetching matakuliah");
-    }
-
-    connection.query("SELECT * FROM mahasiswa", (err, mahasiswaRows) => {
+    connection.query("SELECT * FROM nilai ORDER by idMk DESC", (err, rows) => {
       if (err) {
-        console.error("Error fetching mahasiswa:", err);
-        return res.status(500).send("Error fetching mahasiswa");
+        return res.status(500).send("Error Ambil data dari database");
       }
 
       res.render("dosen", {
         title: "Dashboard Dosen",
-        matkulList: matkulRows,
-        mahasiswaList: mahasiswaRows,
+        data: rows,
         user: user,
       });
     });
-  });
 });
 
 // Tampilkan daftar nilai berdasarkan mata kuliah
