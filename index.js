@@ -29,15 +29,21 @@ app.use(express.static("assets"));
 app.use('/assets', express.static('assets'));
 
 // Import routes
+const landingPage = require("./routes/landing");
 const loginRouter = require("./routes/login");
 const mahasiswaRouter = require("./routes/mahasiswa");
 const dosenRouter = require("./routes/dosen");
 
-// Routing
-app.use("/portalnilai", loginRouter);
+// Routing landing
+app.use("/portalnilai/", landingPage);
 app.get("/", (req, res) => {
   res.redirect("/portalnilai/");
 });
+
+
+//ruting login
+app.use("/portalnilai/login", loginRouter);
+
 app.use("/portalnilai/mahasiswa", mahasiswaRouter);
 app.use("/portalnilai/dosen", dosenRouter);
 

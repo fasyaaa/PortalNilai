@@ -4,7 +4,7 @@ const router = express.Router();
 const connection = require("../config/database");
 
 router.get("/", (req, res) => {
-  res.render("login", { title: "Login", error: null });
+  res.render("login",  { title: "Login", error: null });
 });
 
 router.post("/", async (req, res) => {
