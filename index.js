@@ -23,7 +23,10 @@ app.use(cors());
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
-app.use(express.static("public"));
+app.use(express.static("assets"));
+
+// import routes file
+app.use('/assets', express.static('assets'));
 
 // Import routes
 const loginRouter = require("./routes/login");
